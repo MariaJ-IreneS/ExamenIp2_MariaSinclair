@@ -80,7 +80,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario: \n" + "\nNombre: " + nombre + "\nApellido: " + apellido + "\nClave: " + clave + "\nFecha: " + fecha + "\nSexo=" + sexo + "\nDepartamento: " + departamento + "\nNumero de identidad=" + numidentidad;
+        return "Usuario: \n" + "\nNombre: " + nombre + "\nApellido: " + apellido + "\nClave: " + clave + "\nFecha: " + fecha + "\nSexo=" + sexo + "\nDepartamento: " + departamento + "\nNumero de identidad=" + numidentidad + "\n";
     }
 
 }

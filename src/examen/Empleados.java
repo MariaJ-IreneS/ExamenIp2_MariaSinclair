@@ -42,7 +42,7 @@ public class Empleados extends Usuario {
 
     @Override
     public String toString() {
-        return super.toString() + "Empleados: \n" + "\nCarrera: " + carrera + "\nPuesto Laboral: " + puestol + "\nAnios de Trabajo: " + anios;
+        return super.toString() + "Empleados: \n" + "\nCarrera: " + carrera + "\nPuesto Laboral: " + puestol + "\nAnios de Trabajo: " + anios+"\n";
     }
 
 }
