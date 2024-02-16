@@ -1,6 +1,7 @@
 package examen;
 
 import java.util.Date;
+import java.util.Random;
 
 public class Usuario {
 
@@ -19,6 +20,7 @@ public class Usuario {
         this.fecha = fecha;
         this.sexo = sexo;
         this.departamento = departamento;
+        setNumidentidad();
     }
 
     public String getNombre() {
@@ -70,13 +72,37 @@ public class Usuario {
     }
 
     public void setDepartamento(String departamento) {
-        if (departamento.equalsIgnoreCase("Francisco Morazan")) {
-            int parte1 = 01;
-        }
+        this.departamento = departamento;
     }
 
-    public void setNumidentidad(String numidentidad) {
-        this.numidentidad = numidentidad;
+    public void setNumidentidad() {
+        String dep = "", mun = "", anio = "", complemento = "";
+        if (this.departamento.equalsIgnoreCase("Francisco Morazan")) {
+            dep = "01";
+            Random rand = new Random();
+            int numeroAleatorio = rand.nextInt(28) + 1;
+            mun = String.format("%02d", numeroAleatorio);
+
+        }
+        if (this.departamento.equalsIgnoreCase("Cortes")) {
+            dep = "02";
+            Random rand = new Random();
+            int numeroAleatorio = rand.nextInt(12) + 1;
+            mun = String.format("%02d", numeroAleatorio);
+        }
+        if (this.departamento.equalsIgnoreCase("Comayagua")) {
+            dep = "03";
+            Random rand = new Random();
+            int numeroAleatorio = rand.nextInt(21) + 1;
+            mun = String.format("%02d", numeroAleatorio);
+        }
+        
+        anio = Integer.toString(this.fecha.getYear());
+        Random rand = new Random();
+        int numeroAleatorio = rand.nextInt(90000) + 10000;
+        complemento = Integer.toString(numeroAleatorio);
+
+        numidentidad = "" + dep + mun + anio + complemento;
     }
 
     @Override
