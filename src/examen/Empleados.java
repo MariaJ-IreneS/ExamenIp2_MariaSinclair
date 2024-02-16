@@ -9,8 +9,8 @@ public class Empleados extends Usuario {
     private String puestol;
     private double anios;
 
-    public Empleados(String nombre, String apellido, String clave, Date fecha, String sexo, String departamento, String numidentidad, String carrera, String puestol, double anios) {
-        super(nombre, apellido, clave, fecha, sexo, departamento, numidentidad);
+    public Empleados(String nombre, String apellido, String clave, Date fecha, String sexo, String departamento, String carrera, String puestol, double anios) {
+        super(nombre, apellido, clave, fecha, sexo, departamento);
         this.carrera = carrera;
         this.puestol = puestol;
         this.anios = anios;
@@ -42,7 +42,7 @@ public class Empleados extends Usuario {
 
     @Override
     public String toString() {
-        return super.toString() + "Empleados: \n" + "\nCarrera: " + carrera + "\nPuesto Laboral: " + puestol + "\nAnios de Trabajo: " + anios+"\n";
+        return super.toString() + "Empleados: \n" + "\nCarrera: " + carrera + "\nPuesto Laboral: " + puestol + "\nAnios de Trabajo: " + anios + "\n";
     }
 
 }

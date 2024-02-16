@@ -7,8 +7,8 @@ public class Clientes extends Usuario {
 
     ArrayList<Tramites> tramite;
 
-    public Clientes(String nombre, String apellido, String clave, Date fecha, String sexo, String departamento, String numidentidad, ArrayList tramite) {
-        super(nombre, apellido, clave, fecha, sexo, departamento, numidentidad);
+    public Clientes(String nombre, String apellido, String clave, Date fecha, String sexo, String departamento, ArrayList tramite) {
+        super(nombre, apellido, clave, fecha, sexo, departamento);
         this.tramite = tramite;
     }
 

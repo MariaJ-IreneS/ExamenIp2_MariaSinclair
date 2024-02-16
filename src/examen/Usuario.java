@@ -12,14 +12,13 @@ public class Usuario {
     protected String departamento;
     protected String numidentidad;
 
-    public Usuario(String nombre, String apellido, String clave, Date fecha, String sexo, String departamento, String numidentidad) {
+    public Usuario(String nombre, String apellido, String clave, Date fecha, String sexo, String departamento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.clave = clave;
         this.fecha = fecha;
         this.sexo = sexo;
         this.departamento = departamento;
-        this.numidentidad = numidentidad;
     }
 
     public String getNombre() {
@@ -71,7 +70,9 @@ public class Usuario {
     }
 
     public void setDepartamento(String departamento) {
-        this.departamento = departamento;
+        if (departamento.equalsIgnoreCase("Francisco Morazan")) {
+            int parte1 = 01;
+        }
     }
 
     public void setNumidentidad(String numidentidad) {
