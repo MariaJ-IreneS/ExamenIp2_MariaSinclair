@@ -12,6 +12,7 @@ public class Clientes extends Usuario {
         this.tramite = tramite;
     }
 
+
     @Override
     public String toString() {
         return "Clientes: \n " + "\nTramite: " + tramite + "\n";
