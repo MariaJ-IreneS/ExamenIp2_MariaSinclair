@@ -18,14 +18,14 @@ public class JframeExamen extends javax.swing.JFrame {
     public JframeExamen() {
         this.pack();
         initComponents();
-
+        
         persona.add(new Empleados("Juan", "Perez", "j1234", new Date(100, 01, 15), "Masculino", "Francisco Morazan", "Sistemas", "Analista", 2.5));
         persona.add(new Empleados("Maria", "Lainez", "maria123", new Date(90, 06, 30), "Femenino", "Cortes", "Finanzas", "Cajero", 1));
         persona.add(new Empleados("Lucia", "Gomez", "lugomez1", new Date(75, 10, 23), "Femenino", "Comayagua", "Derecho", "Notaria", 5));
         persona.add(new Clientes("Pablo", "Guevara", "p234", new Date(98, 07, 19), "Masculino", "Comayagua"));
         persona.add(new Clientes("Carla", "Padilla", "carla634", new Date(105, 01, 06), "Femenino", "Cortes"));
         persona.add(new Clientes("Luis", "Amador", "amador234", new Date(87, 05, 17), "Masculino", "Francisco Morazan"));
-
+        
         Tramites t = new Tramites("Acta", "Solicitud de Acta de Nacimiento", new Date(124, 01, 15), "0201198709812");
         Tramites t1 = new Tramites("Solicitud", "Modificacion de Tramite", new Date(123, 04, 18), "0312200007652");
         Tramites t2 = new Tramites("Registro", "Inscripcion de nino", new Date(124, 05, 19), "0123199810678");
@@ -33,7 +33,7 @@ public class JframeExamen extends javax.swing.JFrame {
         ((Clientes) persona.get(4)).getTramite().add(t1);
         ((Clientes) persona.get(5)).getTramite().add(t2);
         System.out.println(persona);
-
+        
     }
 
     /**
@@ -473,6 +473,11 @@ public class JframeExamen extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI Historic", 3, 12)); // NOI18N
         jButton2.setText("E N V I A R");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout p_gestionLayout = new javax.swing.GroupLayout(p_gestion);
         p_gestion.setLayout(p_gestionLayout);
@@ -674,7 +679,7 @@ public class JframeExamen extends javax.swing.JFrame {
             if (nc.equals(nc2) && clave.getText().equals(s.getClave()) && (s instanceof Clientes)) {
                 f = 2;
             }
-
+            
         }
         if (f == -1) {
             JOptionPane.showMessageDialog(this, "Usuario no existe. ");
@@ -698,13 +703,13 @@ public class JframeExamen extends javax.swing.JFrame {
                         DefaultTableModel modelo2 = (DefaultTableModel) tablatrami.getModel();
                         modelo2.addRow(fila2);
                         tablatrami.setModel(modelo2);
-
+                        
                     }
-
+                    
                 }
-
+                
             }
-
+            
         }
         if (f == 2) {
             this.setVisible(false);
@@ -715,27 +720,42 @@ public class JframeExamen extends javax.swing.JFrame {
             clave.setText("");
             for (Usuario t : persona) {
                 if (t instanceof Clientes) {
-                    Object[] fila = {t.getNombre(), t.getNumidentidad(), t.getFecha()};
-                    DefaultTableModel modelo = (DefaultTableModel) table1_civil.getModel();
-                    modelo.addRow(fila);
-                    table1_civil.setModel(modelo);
-                    ArrayList<Tramites> tram = ((Clientes) t).getTramite();
-                    for (Tramites trm : tram) {
-                        Object[] fila2 = {trm.getNombre(), trm.getDescripcion(), trm.getFechaenvio(), trm.getNumidentidad()};
-                        DefaultTableModel modelo2 = (DefaultTableModel) tablacivil.getModel();
-                        modelo2.addRow(fila2);
-                        tablacivil.setModel(modelo2);
-
+                    String z = t.getNombre() + " " + t.getApellido();
+                    if (z.equals(nc)) {
+                        fulano = t;
+                        Object[] fila = {t.getNombre(), t.getNumidentidad(), t.getFecha()};
+                        DefaultTableModel modelo = (DefaultTableModel) table1_civil.getModel();
+                        modelo.addRow(fila);
+                        table1_civil.setModel(modelo);
+                        ArrayList<Tramites> tram = ((Clientes) t).getTramite();
+                        for (Tramites trm : tram) {
+                            Object[] fila2 = {trm.getNombre(), trm.getDescripcion(), trm.getFechaenvio(), trm.getNumidentidad()};
+                            DefaultTableModel modelo2 = (DefaultTableModel) tablacivil.getModel();
+                            modelo2.addRow(fila2);
+                            tablacivil.setModel(modelo2);
+                            
+                        }
                     }
-
+                    
                 }
-
+                
             }
-
+            
         }
-
+        
 
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        ((Clientes) fulano).getTramite().add(new Tramites(tf_nombrecivil.getText(), tp_descripcion.getText(), new Date(), "0204199807345"));
+        Object[] fila2 = {tf_nombrecivil.getText(), tp_descripcion.getText(), new Date(), "0204199807345"};
+        DefaultTableModel modelo2 = (DefaultTableModel) tablacivil.getModel();
+        modelo2.addRow(fila2);
+        tablacivil.setModel(modelo2);
+        JOptionPane.showMessageDialog(this, "Tramite agregado con exito.");
+        tf_nombrecivil.setText("");
+        tp_descripcion.setText("");
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -831,4 +851,5 @@ public class JframeExamen extends javax.swing.JFrame {
     private javax.swing.JTextPane tp_descripcion;
     // End of variables declaration//GEN-END:variables
 ArrayList<Usuario> persona = new ArrayList();
+    Usuario fulano;
 }
