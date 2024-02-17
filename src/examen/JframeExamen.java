@@ -2,6 +2,7 @@ package examen;
 
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,14 +19,14 @@ public class JframeExamen extends javax.swing.JFrame {
     public JframeExamen() {
         this.pack();
         initComponents();
-        
+
         persona.add(new Empleados("Juan", "Perez", "j1234", new Date(100, 01, 15), "Masculino", "Francisco Morazan", "Sistemas", "Analista", 2.5));
         persona.add(new Empleados("Maria", "Lainez", "maria123", new Date(90, 06, 30), "Femenino", "Cortes", "Finanzas", "Cajero", 1));
         persona.add(new Empleados("Lucia", "Gomez", "lugomez1", new Date(75, 10, 23), "Femenino", "Comayagua", "Derecho", "Notaria", 5));
         persona.add(new Clientes("Pablo", "Guevara", "p234", new Date(98, 07, 19), "Masculino", "Comayagua"));
         persona.add(new Clientes("Carla", "Padilla", "carla634", new Date(105, 01, 06), "Femenino", "Cortes"));
         persona.add(new Clientes("Luis", "Amador", "amador234", new Date(87, 05, 17), "Masculino", "Francisco Morazan"));
-        
+
         Tramites t = new Tramites("Acta", "Solicitud de Acta de Nacimiento", new Date(124, 01, 15), "0201198709812");
         Tramites t1 = new Tramites("Solicitud", "Modificacion de Tramite", new Date(123, 04, 18), "0312200007652");
         Tramites t2 = new Tramites("Registro", "Inscripcion de nino", new Date(124, 05, 19), "0123199810678");
@@ -33,7 +34,7 @@ public class JframeExamen extends javax.swing.JFrame {
         ((Clientes) persona.get(4)).getTramite().add(t1);
         ((Clientes) persona.get(5)).getTramite().add(t2);
         System.out.println(persona);
-        
+
     }
 
     /**
@@ -65,14 +66,14 @@ public class JframeExamen extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         tf_clave = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cb_sexo = new javax.swing.JComboBox<>();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cb_depto = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
-        jCalendar2 = new com.toedter.calendar.JCalendar();
-        jTextField4 = new javax.swing.JTextField();
+        calendar = new com.toedter.calendar.JCalendar();
+        jButton7 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
+        modificar = new javax.swing.JButton();
         civil = new javax.swing.JFrame();
         p_civil = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
@@ -114,6 +115,12 @@ public class JframeExamen extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Sitka Subheading", 3, 24)); // NOI18N
         jLabel4.setText("B I E N V E N I D O :");
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
 
         p_infociviles.setBackground(new java.awt.Color(204, 204, 255));
 
@@ -201,9 +208,9 @@ public class JframeExamen extends javax.swing.JFrame {
         p_modciviles.setBackground(new java.awt.Color(204, 204, 255));
 
         mostrarid.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        mostrarid.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mostraridActionPerformed(evt);
+        mostrarid.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                mostraridItemStateChanged(evt);
             }
         });
 
@@ -225,18 +232,27 @@ public class JframeExamen extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Segoe UI Historic", 3, 14)); // NOI18N
         jLabel10.setText("Sexo:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino", " " }));
+        cb_sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Femenino", "Masculino", " " }));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI Historic", 3, 14)); // NOI18N
         jLabel12.setText("Departamento:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Francisco Morazan", "Cortes", "Comayagua", " " }));
+        cb_depto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Francisco Morazan", "Cortes", "Comayagua", " " }));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI Historic", 3, 14)); // NOI18N
         jLabel13.setText("Fecha de Nacimiento:");
 
-        jTextField4.setFont(new java.awt.Font("Segoe UI Historic", 3, 12)); // NOI18N
-        jTextField4.setText("M O D I F I C A R");
+        jButton7.setText("M O D I F I C A R ");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout p_modcivilesLayout = new javax.swing.GroupLayout(p_modciviles);
         p_modciviles.setLayout(p_modcivilesLayout);
@@ -260,24 +276,24 @@ public class JframeExamen extends javax.swing.JFrame {
                         .addGap(73, 73, 73))
                     .addGroup(p_modcivilesLayout.createSequentialGroup()
                         .addGroup(p_modcivilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cb_sexo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(tf_clave, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(cb_depto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(p_modcivilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(p_modcivilesLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                                 .addGroup(p_modcivilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_modcivilesLayout.createSequentialGroup()
-                                        .addComponent(jCalendar2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(calendar, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(16, 16, 16)))
                                 .addGap(56, 56, 56))
                             .addGroup(p_modcivilesLayout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(47, 47, 47)
+                                .addComponent(jButton7)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         p_modcivilesLayout.setVerticalGroup(
@@ -299,34 +315,39 @@ public class JframeExamen extends javax.swing.JFrame {
                     .addComponent(jLabel13))
                 .addGroup(p_modcivilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(p_modcivilesLayout.createSequentialGroup()
+                        .addGroup(p_modcivilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(p_modcivilesLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tf_clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cb_sexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(23, 23, 23)
+                                .addComponent(jLabel12))
+                            .addGroup(p_modcivilesLayout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(calendar, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tf_clave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel12))
-                    .addGroup(p_modcivilesLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jCalendar2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(p_modcivilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(p_modcivilesLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cb_depto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(29, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_modcivilesLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7)
+                        .addGap(19, 19, 19))))
         );
 
         jTabbedPane1.addTab("Modificacion Civiles", p_modciviles);
 
-        jButton6.setText("Cerrar Sesion ❌");
-        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+        modificar.setText("Cerrar Sesion ❌");
+        modificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton6MouseClicked(evt);
+                modificarMouseClicked(evt);
+            }
+        });
+        modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarActionPerformed(evt);
             }
         });
 
@@ -344,7 +365,7 @@ public class JframeExamen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton6)
+                .addComponent(modificar)
                 .addContainerGap())
         );
         p_empleadoLayout.setVerticalGroup(
@@ -358,7 +379,7 @@ public class JframeExamen extends javax.swing.JFrame {
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(p_empleadoLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton6)))
+                        .addComponent(modificar)))
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
@@ -636,10 +657,6 @@ public class JframeExamen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mostraridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostraridActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mostraridActionPerformed
-
     private void tf_claveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_claveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_claveActionPerformed
@@ -662,11 +679,11 @@ public class JframeExamen extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_jButton5MouseClicked
 
-    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+    private void modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarMouseClicked
         empleado.setVisible(false);
         civil.setVisible(false);
         this.setVisible(true);
-    }//GEN-LAST:event_jButton6MouseClicked
+    }//GEN-LAST:event_modificarMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         int f = -1;
@@ -679,7 +696,7 @@ public class JframeExamen extends javax.swing.JFrame {
             if (nc.equals(nc2) && clave.getText().equals(s.getClave()) && (s instanceof Clientes)) {
                 f = 2;
             }
-            
+
         }
         if (f == -1) {
             JOptionPane.showMessageDialog(this, "Usuario no existe. ");
@@ -703,13 +720,13 @@ public class JframeExamen extends javax.swing.JFrame {
                         DefaultTableModel modelo2 = (DefaultTableModel) tablatrami.getModel();
                         modelo2.addRow(fila2);
                         tablatrami.setModel(modelo2);
-                        
+
                     }
-                    
+
                 }
-                
+
             }
-            
+
         }
         if (f == 2) {
             this.setVisible(false);
@@ -733,16 +750,16 @@ public class JframeExamen extends javax.swing.JFrame {
                             DefaultTableModel modelo2 = (DefaultTableModel) tablacivil.getModel();
                             modelo2.addRow(fila2);
                             tablacivil.setModel(modelo2);
-                            
+
                         }
                     }
-                    
+
                 }
-                
+
             }
-            
+
         }
-        
+
 
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -756,6 +773,60 @@ public class JframeExamen extends javax.swing.JFrame {
         tf_nombrecivil.setText("");
         tp_descripcion.setText("");
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel(persona.toArray());
+        for (int i = 0; i < modelo.getSize(); i++) {
+            if (modelo.getElementAt(i) instanceof Empleados) {
+                modelo.removeElementAt(i);
+            }
+
+        }
+        for (int i = 0; i < modelo.getSize(); i++) {
+            if (modelo.getElementAt(i) instanceof Empleados) {
+                modelo.removeElementAt(i);
+            }
+
+        }
+        for (int i = 0; i < modelo.getSize(); i++) {
+            if (modelo.getElementAt(i) instanceof Empleados) {
+                modelo.removeElementAt(i);
+            }
+
+        }
+        for (int i = 0; i < modelo.getSize(); i++) {
+            if (modelo.getElementAt(i) instanceof Empleados) {
+                modelo.removeElementAt(i);
+            }
+
+        }
+        mostrarid.setModel(modelo);
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void mostraridItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_mostraridItemStateChanged
+        if (evt.getStateChange() == 1) {
+            Clientes t = (Clientes) mostrarid.getSelectedItem();
+            tf_nombre.setText(t.getNombre());
+            tf_apellido.setText(t.getApellido());
+            tf_clave.setText(t.getClave());
+            cb_sexo.setToolTipText(t.getSexo());
+            cb_depto.setToolTipText(t.getDepartamento());
+            calendar.setDate(t.getFecha());
+
+        }
+    }//GEN-LAST:event_mostraridItemStateChanged
+
+    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modificarActionPerformed
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -793,6 +864,9 @@ public class JframeExamen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JCalendar calendar;
+    private javax.swing.JComboBox<String> cb_depto;
+    private javax.swing.JComboBox<String> cb_sexo;
     private javax.swing.JFrame civil;
     private javax.swing.JPasswordField clave;
     private javax.swing.JFrame empleado;
@@ -800,10 +874,7 @@ public class JframeExamen extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private com.toedter.calendar.JCalendar jCalendar2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -827,8 +898,8 @@ public class JframeExamen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel login;
+    private javax.swing.JButton modificar;
     private javax.swing.JComboBox<String> mostrarid;
     private javax.swing.JTextField nombre;
     private javax.swing.JPanel p_civil;

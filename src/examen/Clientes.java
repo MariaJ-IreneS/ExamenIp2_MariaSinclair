@@ -21,7 +21,7 @@ public class Clientes extends Usuario {
 
     @Override
     public String toString() {
-        return super.toString() + "Clientes: \n " + "\nTramite: " + tramite + "\n";
+        return super.getNumidentidad();
     }
 
 }
