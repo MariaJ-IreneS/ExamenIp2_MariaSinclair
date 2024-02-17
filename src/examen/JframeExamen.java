@@ -71,9 +71,9 @@ public class JframeExamen extends javax.swing.JFrame {
         cb_depto = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         calendar = new com.toedter.calendar.JCalendar();
-        jButton7 = new javax.swing.JButton();
+        mod = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
-        modificar = new javax.swing.JButton();
+        cerrar = new javax.swing.JButton();
         civil = new javax.swing.JFrame();
         p_civil = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
@@ -242,15 +242,10 @@ public class JframeExamen extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Segoe UI Historic", 3, 14)); // NOI18N
         jLabel13.setText("Fecha de Nacimiento:");
 
-        jButton7.setText("M O D I F I C A R ");
-        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+        mod.setText("M O D I F I C A R ");
+        mod.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton7MouseClicked(evt);
-            }
-        });
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                modMouseClicked(evt);
             }
         });
 
@@ -293,7 +288,7 @@ public class JframeExamen extends javax.swing.JFrame {
                                 .addGap(56, 56, 56))
                             .addGroup(p_modcivilesLayout.createSequentialGroup()
                                 .addGap(47, 47, 47)
-                                .addComponent(jButton7)
+                                .addComponent(mod)
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         p_modcivilesLayout.setVerticalGroup(
@@ -333,21 +328,21 @@ public class JframeExamen extends javax.swing.JFrame {
                         .addContainerGap(29, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_modcivilesLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7)
+                        .addComponent(mod)
                         .addGap(19, 19, 19))))
         );
 
         jTabbedPane1.addTab("Modificacion Civiles", p_modciviles);
 
-        modificar.setText("Cerrar Sesion ❌");
-        modificar.addMouseListener(new java.awt.event.MouseAdapter() {
+        cerrar.setText("Cerrar Sesion ❌");
+        cerrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                modificarMouseClicked(evt);
+                cerrarMouseClicked(evt);
             }
         });
-        modificar.addActionListener(new java.awt.event.ActionListener() {
+        cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificarActionPerformed(evt);
+                cerrarActionPerformed(evt);
             }
         });
 
@@ -365,7 +360,7 @@ public class JframeExamen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(modificar)
+                .addComponent(cerrar)
                 .addContainerGap())
         );
         p_empleadoLayout.setVerticalGroup(
@@ -379,7 +374,7 @@ public class JframeExamen extends javax.swing.JFrame {
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(p_empleadoLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(modificar)))
+                        .addComponent(cerrar)))
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
@@ -679,11 +674,11 @@ public class JframeExamen extends javax.swing.JFrame {
         this.setVisible(true);
     }//GEN-LAST:event_jButton5MouseClicked
 
-    private void modificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificarMouseClicked
+    private void cerrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cerrarMouseClicked
         empleado.setVisible(false);
         civil.setVisible(false);
         this.setVisible(true);
-    }//GEN-LAST:event_modificarMouseClicked
+    }//GEN-LAST:event_cerrarMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         int f = -1;
@@ -816,17 +811,17 @@ public class JframeExamen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mostraridItemStateChanged
 
-    private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
+    private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_modificarActionPerformed
+    }//GEN-LAST:event_cerrarActionPerformed
 
-    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7MouseClicked
+    private void modMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modMouseClicked
+        ((Clientes) mostrarid.getSelectedItem()).setNombre(tf_nombre.getText());
+        ((Clientes) mostrarid.getSelectedItem()).setApellido(tf_apellido.getText());
+        ((Clientes) mostrarid.getSelectedItem()).setClave(tf_clave.getText());
+        JOptionPane.showMessageDialog(this, "Civil modificado Exitosamente");
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_modMouseClicked
 
     /**
      * @param args the command line arguments
@@ -867,6 +862,7 @@ public class JframeExamen extends javax.swing.JFrame {
     private com.toedter.calendar.JCalendar calendar;
     private javax.swing.JComboBox<String> cb_depto;
     private javax.swing.JComboBox<String> cb_sexo;
+    private javax.swing.JButton cerrar;
     private javax.swing.JFrame civil;
     private javax.swing.JPasswordField clave;
     private javax.swing.JFrame empleado;
@@ -874,7 +870,6 @@ public class JframeExamen extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -899,7 +894,7 @@ public class JframeExamen extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JPanel login;
-    private javax.swing.JButton modificar;
+    private javax.swing.JButton mod;
     private javax.swing.JComboBox<String> mostrarid;
     private javax.swing.JTextField nombre;
     private javax.swing.JPanel p_civil;
