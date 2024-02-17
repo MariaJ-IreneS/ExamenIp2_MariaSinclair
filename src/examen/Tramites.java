@@ -1,5 +1,6 @@
 package examen;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Tramites {
@@ -9,10 +10,11 @@ public class Tramites {
     private Date fechaenvio;
     private String numidentidad;
 
-    public Tramites(String nombre, String descripcion, Date fechaenvio) {
+    public Tramites(String nombre, String descripcion, Date fechaenvio, String numidentidad) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaenvio = fechaenvio;
+        this.numidentidad = numidentidad;
     }
 
     public String getNombre() {
@@ -49,7 +51,9 @@ public class Tramites {
 
     @Override
     public String toString() {
-        return "Tramites: \n" + "\nNombre: " + nombre + "\nDescripcion: " + descripcion + "\nFecha de envio: " + fechaenvio + "\nNumero de Identidad: " + numidentidad + "\n";
+
+        SimpleDateFormat sd = new SimpleDateFormat("dd/MM/yyyy");
+        return "Tramites: \n" + "\nNombre: " + nombre + "\nDescripcion: " + descripcion + "\nFecha de envio: " + sd.format(fechaenvio) + "\nNumero de Identidad: " + numidentidad + "\n";
     }
 
 }

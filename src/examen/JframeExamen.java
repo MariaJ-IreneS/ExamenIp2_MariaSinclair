@@ -1,8 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package examen;
+
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  * Fila 3 silla 12
@@ -17,6 +18,22 @@ public class JframeExamen extends javax.swing.JFrame {
     public JframeExamen() {
         this.pack();
         initComponents();
+
+        persona.add(new Empleados("Juan", "Perez", "j1234", new Date(100, 01, 15), "Masculino", "Francisco Morazan", "Sistemas", "Analista", 2.5));
+        persona.add(new Empleados("Maria", "Lainez", "maria123", new Date(90, 06, 30), "Femenino", "Cortes", "Finanzas", "Cajero", 1));
+        persona.add(new Empleados("Lucia", "Gomez", "lugomez1", new Date(75, 10, 23), "Femenino", "Comayagua", "Derecho", "Notaria", 5));
+        persona.add(new Clientes("Pablo", "Guevara", "p234", new Date(98, 07, 19), "Masculino", "Comayagua"));
+        persona.add(new Clientes("Carla", "Padilla", "carla634", new Date(105, 01, 06), "Femenino", "Cortes"));
+        persona.add(new Clientes("Luis", "Amador", "amador234", new Date(87, 05, 17), "Masculino", "Francisco Morazan"));
+
+        Tramites t = new Tramites("Acta", "Solicitud de Acta de Nacimiento", new Date(124, 01, 15), "0201198709812");
+        Tramites t1 = new Tramites("Solicitud", "Modificacion de Tramite", new Date(123, 04, 18), "0312200007652");
+        Tramites t2 = new Tramites("Registro", "Inscripcion de nino", new Date(124, 05, 19), "0123199810678");
+        ((Clientes) persona.get(3)).getTramite().add(t);
+        ((Clientes) persona.get(4)).getTramite().add(t1);
+        ((Clientes) persona.get(5)).getTramite().add(t2);
+        System.out.println(persona);
+
     }
 
     /**
@@ -37,7 +54,7 @@ public class JframeExamen extends javax.swing.JFrame {
         tabla1_empleado = new javax.swing.JScrollPane();
         tablainfo = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        tabla2_empleado = new javax.swing.JScrollPane();
+        tablatramites = new javax.swing.JScrollPane();
         tablatrami = new javax.swing.JTable();
         p_modciviles = new javax.swing.JPanel();
         mostrarid = new javax.swing.JComboBox<>();
@@ -55,7 +72,7 @@ public class JframeExamen extends javax.swing.JFrame {
         jCalendar2 = new com.toedter.calendar.JCalendar();
         jTextField4 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
         civil = new javax.swing.JFrame();
         p_civil = new javax.swing.JPanel();
         jTabbedPane3 = new javax.swing.JTabbedPane();
@@ -65,7 +82,7 @@ public class JframeExamen extends javax.swing.JFrame {
         table1_civil = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
         tabla2_empleado1 = new javax.swing.JScrollPane();
-        tablatrami1 = new javax.swing.JTable();
+        tablacivil = new javax.swing.JTable();
         p_gestion = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         tf_nombrecivil = new javax.swing.JTextField();
@@ -75,21 +92,25 @@ public class JframeExamen extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
         login = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        clave = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
 
         empleado.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         p_empleado.setBackground(new java.awt.Color(204, 255, 255));
         p_empleado.setPreferredSize(new java.awt.Dimension(720, 485));
+        p_empleado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                p_empleadoMouseClicked(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Sitka Subheading", 3, 24)); // NOI18N
         jLabel4.setText("B I E N V E N I D O :");
@@ -101,10 +122,7 @@ public class JframeExamen extends javax.swing.JFrame {
 
         tablainfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Nombre Completo", "N. Identidad", "Fecha Nacimiento"
@@ -125,10 +143,7 @@ public class JframeExamen extends javax.swing.JFrame {
 
         tablatrami.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Nombre Tramite", "Descripcion", "Fecha", "Numero de Identidad"
@@ -149,7 +164,7 @@ public class JframeExamen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabla2_empleado.setViewportView(tablatrami);
+        tablatramites.setViewportView(tablatrami);
 
         javax.swing.GroupLayout p_infocivilesLayout = new javax.swing.GroupLayout(p_infociviles);
         p_infociviles.setLayout(p_infocivilesLayout);
@@ -163,8 +178,8 @@ public class JframeExamen extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(p_infocivilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tabla2_empleado, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
-                            .addComponent(tabla1_empleado))))
+                            .addComponent(tabla1_empleado, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                            .addComponent(tablatramites))))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         p_infocivilesLayout.setVerticalGroup(
@@ -173,12 +188,12 @@ public class JframeExamen extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tabla1_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addComponent(tabla1_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(tabla2_empleado, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+                .addComponent(tablatramites, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Informacion Civiles", p_infociviles);
@@ -308,13 +323,10 @@ public class JframeExamen extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Modificacion Civiles", p_modciviles);
 
-        jLabel11.setText("jLabel11");
-
-        jTextField2.setFont(new java.awt.Font("Segoe UI Emoji", 3, 12)); // NOI18N
-        jTextField2.setText("Cerrar Sesion ❌");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+        jButton6.setText("Cerrar Sesion ❌");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
             }
         });
 
@@ -332,7 +344,7 @@ public class JframeExamen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton6)
                 .addContainerGap())
         );
         p_empleadoLayout.setVerticalGroup(
@@ -346,10 +358,10 @@ public class JframeExamen extends javax.swing.JFrame {
                             .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(p_empleadoLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton6)))
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout empleadoLayout = new javax.swing.GroupLayout(empleado.getContentPane());
@@ -376,10 +388,7 @@ public class JframeExamen extends javax.swing.JFrame {
 
         table1_civil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Nombre Completo", "Numero de Identidad", "Fecha de Nacimiento"
@@ -398,12 +407,9 @@ public class JframeExamen extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Segoe UI Historic", 3, 12)); // NOI18N
         jLabel17.setText("Tramites:");
 
-        tablatrami1.setModel(new javax.swing.table.DefaultTableModel(
+        tablacivil.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Nombre Tramite", "Descripcion", "Fecha", "Numero de Identidad"
@@ -424,7 +430,7 @@ public class JframeExamen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tabla2_empleado1.setViewportView(tablatrami1);
+        tabla2_empleado1.setViewportView(tablacivil);
 
         javax.swing.GroupLayout t_personalLayout = new javax.swing.GroupLayout(t_personal);
         t_personal.setLayout(t_personalLayout);
@@ -516,13 +522,11 @@ public class JframeExamen extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Sitka Subheading", 3, 24)); // NOI18N
         jLabel14.setText("B I E N V E N I D O :");
 
-        jLabel15.setText("jLabel11");
-
-        jTextField3.setFont(new java.awt.Font("Segoe UI Emoji", 3, 12)); // NOI18N
-        jTextField3.setText("Cerrar Sesion ❌");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+        jButton5.setFont(new java.awt.Font("Segoe UI Emoji", 3, 12)); // NOI18N
+        jButton5.setText("Cerrar Sesion❌");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
             }
         });
 
@@ -531,30 +535,29 @@ public class JframeExamen extends javax.swing.JFrame {
         p_civilLayout.setHorizontalGroup(
             p_civilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_civilLayout.createSequentialGroup()
+                .addGap(61, 61, 61)
                 .addGroup(p_civilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(p_civilLayout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(p_civilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(p_civilLayout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(27, 27, 27)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 68, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_civilLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jLabel14)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_civilLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addGap(18, 18, 18))
         );
         p_civilLayout.setVerticalGroup(
             p_civilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_civilLayout.createSequentialGroup()
-                .addGap(13, 13, 13)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jButton5)
+                .addGap(4, 4, 4)
                 .addGroup(p_civilLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
         );
@@ -580,7 +583,7 @@ public class JframeExamen extends javax.swing.JFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         login.setBackground(new java.awt.Color(204, 255, 204));
@@ -594,12 +597,12 @@ public class JframeExamen extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
         jLabel2.setText("Contraseña:");
         login.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
-        login.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 472, 30));
+        login.add(nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 472, 30));
 
         jLabel3.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
         jLabel3.setText("Nombre Completo:");
         login.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
-        login.add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 470, 30));
+        login.add(clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 470, 30));
 
         jButton1.setFont(new java.awt.Font("Sitka Text", 3, 18)); // NOI18N
         jButton1.setText("Ingresar");
@@ -608,29 +611,20 @@ public class JframeExamen extends javax.swing.JFrame {
                 jButton1MouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
         login.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, -1, -1));
 
-        jTextField5.setText("❌");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+        jButton3.setText("❌");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
             }
         });
-        login.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, 30, 30));
-
-        jTextField6.setFont(new java.awt.Font("Roboto Medium", 2, 18)); // NOI18N
-        jTextField6.setText("—");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
-        login.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 0, 30, 30));
+        login.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 0, -1, -1));
 
         getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 721, 485));
 
@@ -645,32 +639,103 @@ public class JframeExamen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tf_claveActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void p_empleadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_p_empleadoMouseClicked
+
+    }//GEN-LAST:event_p_empleadoMouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        empleado.setVisible(false);
+        civil.setVisible(false);
+        this.setVisible(true);
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        empleado.setVisible(false);
+        civil.setVisible(false);
+        this.setVisible(true);
+    }//GEN-LAST:event_jButton6MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        login.setVisible(false);
-        empleado.pack();
-        empleado.setVisible(true);
+        int f = -1;
+        String nc = nombre.getText();
+        for (Usuario s : persona) {
+            String nc2 = s.getNombre() + " " + s.getApellido();
+            if (nc.equals(nc2) && clave.getText().equals(s.getClave()) && (s instanceof Empleados)) {
+                f = 1;
+            }
+            if (nc.equals(nc2) && clave.getText().equals(s.getClave()) && (s instanceof Clientes)) {
+                f = 2;
+            }
+
+        }
+        if (f == -1) {
+            JOptionPane.showMessageDialog(this, "Usuario no existe. ");
+        }
+        if (f == 1) {
+            this.setVisible(false);
+            empleado.pack();
+            empleado.setVisible(true);
+            jLabel11.setText(nc);
+            nombre.setText("");
+            clave.setText("");
+            for (Usuario t : persona) {
+                if (t instanceof Clientes) {
+                    Object[] fila = {t.getNombre(), t.getNumidentidad(), t.getFecha()};
+                    DefaultTableModel modelo = (DefaultTableModel) tablainfo.getModel();
+                    modelo.addRow(fila);
+                    tablainfo.setModel(modelo);
+                    ArrayList<Tramites> tram = ((Clientes) t).getTramite();
+                    for (Tramites trm : tram) {
+                        Object[] fila2 = {trm.getNombre(), trm.getDescripcion(), trm.getFechaenvio(), trm.getNumidentidad()};
+                        DefaultTableModel modelo2 = (DefaultTableModel) tablatrami.getModel();
+                        modelo2.addRow(fila2);
+                        tablatrami.setModel(modelo2);
+
+                    }
+
+                }
+
+            }
+
+        }
+        if (f == 2) {
+            this.setVisible(false);
+            civil.pack();
+            civil.setVisible(true);
+            jLabel15.setText(nc);
+            nombre.setText("");
+            clave.setText("");
+            for (Usuario t : persona) {
+                if (t instanceof Clientes) {
+                    Object[] fila = {t.getNombre(), t.getNumidentidad(), t.getFecha()};
+                    DefaultTableModel modelo = (DefaultTableModel) table1_civil.getModel();
+                    modelo.addRow(fila);
+                    table1_civil.setModel(modelo);
+                    ArrayList<Tramites> tram = ((Clientes) t).getTramite();
+                    for (Tramites trm : tram) {
+                        Object[] fila2 = {trm.getNombre(), trm.getDescripcion(), trm.getFechaenvio(), trm.getNumidentidad()};
+                        DefaultTableModel modelo2 = (DefaultTableModel) tablacivil.getModel();
+                        modelo2.addRow(fila2);
+                        tablacivil.setModel(modelo2);
+
+                    }
+
+                }
+
+            }
+
+        }
+
 
     }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -709,9 +774,13 @@ public class JframeExamen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame civil;
+    private javax.swing.JPasswordField clave;
     private javax.swing.JFrame empleado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private com.toedter.calendar.JCalendar jCalendar2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
@@ -734,19 +803,14 @@ public class JframeExamen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JPanel login;
     private javax.swing.JComboBox<String> mostrarid;
+    private javax.swing.JTextField nombre;
     private javax.swing.JPanel p_civil;
     private javax.swing.JPanel p_empleado;
     private javax.swing.JPanel p_gestion;
@@ -754,11 +818,11 @@ public class JframeExamen extends javax.swing.JFrame {
     private javax.swing.JPanel p_modciviles;
     private javax.swing.JPanel t_personal;
     private javax.swing.JScrollPane tabla1_empleado;
-    private javax.swing.JScrollPane tabla2_empleado;
     private javax.swing.JScrollPane tabla2_empleado1;
+    private javax.swing.JTable tablacivil;
     private javax.swing.JTable tablainfo;
     private javax.swing.JTable tablatrami;
-    private javax.swing.JTable tablatrami1;
+    private javax.swing.JScrollPane tablatramites;
     private javax.swing.JTable table1_civil;
     private javax.swing.JTextField tf_apellido;
     private javax.swing.JTextField tf_clave;
@@ -766,4 +830,5 @@ public class JframeExamen extends javax.swing.JFrame {
     private javax.swing.JTextField tf_nombrecivil;
     private javax.swing.JTextPane tp_descripcion;
     // End of variables declaration//GEN-END:variables
+ArrayList<Usuario> persona = new ArrayList();
 }
